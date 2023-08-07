@@ -1,0 +1,53 @@
+/* Component Styles */
+.container {
+    padding: 20px;
+  }
+  
+  .ant-upload-text {
+    font-size: 16px;
+    color: #999;
+  }
+  
+  /* Form Styles */
+  .form-row {
+    margin-bottom: 24px;
+  }
+  
+  .form-label {
+    font-weight: bold;
+  }
+  
+  .input-field {
+    width: 100%;
+  }
+  
+  .textarea-field {
+    width: 100%;
+  }
+  
+  /* Save Button Styles */
+  .save-button {
+    margin-top: 24px;
+    text-align: right;
+  }
+  
+  /* Media Upload Styles */
+  .upload-dragger {
+    border: 2px dashed #d9d9d9;
+    border-radius: 4px;
+    padding: 16px;
+    text-align: center;
+    background-color: #fafafa;
+    cursor: pointer;
+  }
+  
+  .upload-dragger:hover {
+    border-color: #1890ff;
+  }
+  
+  /* Error Message Styles */
+  .error-message {
+    color: #ff4d4f;
+    font-size: 12px;
+    margin-top: 4px;
+  }

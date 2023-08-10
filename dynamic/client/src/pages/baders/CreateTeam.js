@@ -1,6 +1,6 @@
 import { Create, useForm } from "@refinedev/antd";
 import { getValueProps, mediaUploadMapper } from "@refinedev/strapi-v4";
-import { Divider, Form, Input, Upload } from "antd";
+import { Col, Divider, Form, Input, Row, Upload } from "antd";
 import { useState } from "react";
 
 import { Radio } from "antd";
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const API_URL = process.env.REACT_APP_API_SERVER;
 const TOKEN_KEY = process.env.REACT_APP_TOKEN_KEY;
 
-const BaderCreate = () => {
+const CreateTeam = () => {
   const { formProps, saveButtonProps } = useForm();
   const [fileList, setFileList] = useState([
     {
@@ -40,7 +40,7 @@ const BaderCreate = () => {
 
   return (
     <>
-      <Create saveButtonProps={saveButtonProps}>
+      <Create title="Create Activity" saveButtonProps={saveButtonProps}>
         <Form
           {...formProps}
           layout="vertical"
@@ -65,7 +65,6 @@ const BaderCreate = () => {
               name="photo"
               valuePropName="photo"
               getValueProps={(data) => getValueProps(data, API_URL)}
-              style={{ maxWidth: "00px", width: "100%" }}
             >
               <Upload
                 name="files"
@@ -78,26 +77,47 @@ const BaderCreate = () => {
                 listType="picture-card"
                 fileList={fileList}
               >
-                {fileList.length < 5 && "+ Upload Bader Photo"}
+                {fileList.length < 5 && "+ Upload Activity"}
               </Upload>
             </Form.Item>
           </div>
-          <Divider></Divider>
 
-          <Form.Item label="Name" name="name">
+          <Row gutter={24}>
+            <Col span={12}>
+              <Form.Item label="Team Name" name="name">
+                <Input />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+             
+              <Form.Item label="Team Type" name="teamtype">
+                <Input />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row  gutter={24}>
+          <Col span={12}>
+          <Form.Item label="Team Member" name="member">
             <Input />
           </Form.Item>
-          <Form.Item label="Bader Name" name="description">
-            <TextArea
-              rows={4}
-              placeholder="Bader Description"
-              maxLength={306}
-            />
+          </Col>
+          <Col span={12}>
+          <Form.Item label="Team Responsibility" name="responsibiity">
+            <Input />
           </Form.Item>
+          </Col>
+          </Row>
+          <Row gutter={24}>
+          <Col span={12}>          <Form.Item label="Team Purpose" name="purpose">
+            <TextArea rows={4} placeholder="Team Purpose " maxLength={306} />
+          </Form.Item>
+          </Col>
+
+          </Row>
         </Form>
       </Create>
     </>
   );
 };
 
-export default BaderCreate;
+export default CreateTeam;

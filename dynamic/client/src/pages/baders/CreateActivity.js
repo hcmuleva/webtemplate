@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const API_URL = process.env.REACT_APP_API_SERVER;
 const TOKEN_KEY = process.env.REACT_APP_TOKEN_KEY;
 
-const BaderCreate = () => {
+const CreateActivity = () => {
   const { formProps, saveButtonProps } = useForm();
   const [fileList, setFileList] = useState([
     {
@@ -40,7 +40,7 @@ const BaderCreate = () => {
 
   return (
     <>
-      <Create saveButtonProps={saveButtonProps}>
+      <Create title="Create Activity" saveButtonProps={saveButtonProps}>
         <Form
           {...formProps}
           layout="vertical"
@@ -65,7 +65,7 @@ const BaderCreate = () => {
               name="photo"
               valuePropName="photo"
               getValueProps={(data) => getValueProps(data, API_URL)}
-              style={{ maxWidth: "00px", width: "100%" }}
+             
             >
               <Upload
                 name="files"
@@ -78,19 +78,19 @@ const BaderCreate = () => {
                 listType="picture-card"
                 fileList={fileList}
               >
-                {fileList.length < 5 && "+ Upload Bader Photo"}
+                {fileList.length < 5 && "+ Upload Activity"}
               </Upload>
             </Form.Item>
           </div>
-          <Divider></Divider>
+         
 
-          <Form.Item label="Name" name="name">
+          <Form.Item label="Activity Name" name="name">
             <Input />
           </Form.Item>
-          <Form.Item label="Bader Name" name="description">
+          <Form.Item label="Activity Purpose" name="Purpose">
             <TextArea
               rows={4}
-              placeholder="Bader Description"
+              placeholder="Activity "
               maxLength={306}
             />
           </Form.Item>
@@ -100,4 +100,4 @@ const BaderCreate = () => {
   );
 };
 
-export default BaderCreate;
+export default CreateActivity;

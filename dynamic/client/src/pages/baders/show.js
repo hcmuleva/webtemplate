@@ -1,26 +1,24 @@
+import { PlusOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons'; // Correct import for the UserOutlined icon
 import {
     EditButton,
     ListButton,
     RefreshButton,
-    Show,
+    Show
 } from "@refinedev/antd";
-import { mediaUploadMapper } from "@refinedev/strapi-v4";
-import { useState } from 'react';
-import { Tabs } from 'antd';
-const { TabPane } = Tabs;
-import { Create, useForm } from "@refinedev/antd";
 import { useShow } from "@refinedev/core";
-import { Avatar, Button, Card, Col, Form, Input, Row, Space, Typography } from "antd";
-import { UserOutlined } from '@ant-design/icons'; // Correct import for the UserOutlined icon
-import { UserAddOutlined, TeamOutlined, PlusOutlined } from '@ant-design/icons';
-import { EnvironmentOutlined, PhoneOutlined, MailOutlined } from '@ant-design/icons';
+import { Avatar, Button, Card, Col, Row, Space, Tabs, Typography } from 'antd';
+import { useState } from 'react';
+const { TabPane } = Tabs;
 const { Text } = Typography;
 
-import ProfileCard from "./ProfileCard";
-import ProfileSlider from "./ProfileSlider";
-import Dharmsiksha from "./Dharmsiksha";
 import Activities from "./Activities";
+import { UserProvider } from './BaderUserContext';
+import CreateTeamDialog from "./CreateTeamDialog";
+import CreateUserDialog from "./CreateUserDialog";
 import JobOpprtunity from "./JobOpprtunity";
+import ProfileSlider from "./ProfileSlider";
+import TeamListTableView from "./TeamListTableView";
+import UserListTable from "./UserListTableView";
 
 const API_URL = process.env.REACT_APP_API_SERVER;
 const TOKEN_KEY = process.env.REACT_APP_TOKEN_KEY;
@@ -29,9 +27,10 @@ const BaderShow = () => {
 
 
     const { queryResult } = useShow({
-        metaData: { populate: ['photo', 'address','users_permissions_users', 'businesses','activities','jobs','sanskar'] },
+        metaData: { populate: ['photo', 'address','baderteams','baderteams.photo', 'users_permissions_users','users_permissions_users.photo', 'businesses', 'activities', 'jobs', ] },
     });
-
+    const [openUserDialog, setOpenUserDialog] = useState(false)
+    const [openTeamDialog, setOpenTeamDialog] = useState(false)
     const { data, isLoading } = queryResult;
     if (isLoading) return <h1>Loading...</h1>;
     const record = data?.data;
@@ -42,10 +41,11 @@ const BaderShow = () => {
         queryResult.refetch();
     };
     const photoUrl = record?.photo?.[0]?.url;
-    const address = record?.address??null
-    const {addresstype,housename,landmark,village,tehsil,district,state, country,pincode} = address
+    const address = record?.address ?? null
+    const { addresstype, housename, landmark, village, tehsil, district, state, country, pincode } = address
     const mapUrl = "https://via.placeholder.com/300x200.png?text=Sample+Map"
     console.log("record ", record)
+
     return (
         <Show
             isLoading={isLoading}
@@ -59,8 +59,19 @@ const BaderShow = () => {
                 ),
             }}
         >
-              <Row gutter={[16, 16]}>
-          <Col xs={24} md={12}>
+            
+            <UserProvider>
+            <Space>
+                <CreateUserDialog baderdata={record} />
+                <Button type="primary" onClick={() => console.log('Add Team')} icon={<TeamOutlined />}>
+                                Team
+                            </Button>
+                
+                </Space>
+                </UserProvider>
+          
+            <Row gutter={[16, 16]}>
+                <Col xs={24} md={12}>
                     <Card style={{ width: 'calc(50% - 8px)' }}>
                         <div style={{ textAlign: 'center' }}>
                             <h2>{record.name}</h2>
@@ -87,12 +98,10 @@ const BaderShow = () => {
                         </div>
                         <Space>
 
-                            <Button type="primary" onClick={() => console.log('Add User')} icon={<UserAddOutlined />}>
+                            {/* <Button type="primary" onClick={() => console.log('Add User')} icon={<UserAddOutlined />}>
                                 User
-                            </Button>
-                            <Button type="primary" onClick={() => console.log('Add Team')} icon={<TeamOutlined />}>
-                                Team
-                            </Button>
+                            </Button> */}
+                            <CreateTeamDialog baderdata={record} />
                             <Button type="primary" onClick={() => console.log('Add Activity')} icon={<PlusOutlined />}>
                                 Activity
                             </Button>
@@ -112,50 +121,52 @@ const BaderShow = () => {
 
                         </div>
                         <div style={{ padding: '20px' }}>
-      <Row gutter={16}>
-        <Col span={8}>
-           <Card title="Contact Information" style={{ width: 300 }}>
-      <Space direction="vertical" size="small">
-        <Text strong>{name}</Text>
-        <Text> {housename}</Text>
-        {landmark && <Text><strong>Landmark:</strong> {landmark}</Text>}
-        {district && <Text><strong>District:</strong> {district}</Text>}
-        {state && <Text><strong>State:</strong> {state}</Text>}
-        {country && <Text><strong>Country:</strong> {country}</Text>}
-        {pincode && <Text><strong>Pincode:</strong> {pincode}</Text>}
-        
-      </Space>
-    </Card>
-        </Col>
-        {/* Add more AddressCard instances as needed */}
-      </Row>
-    </div>
-                    </Card>
-                    </Col>
-          <Col xs={24} md={12}>
+                            <Row gutter={16}>
+                                <Col span={8}>
+                                    <Card title="Contact Information" style={{ width: 300 }}>
+                                        <Space direction="vertical" size="small">
+                                            <Text strong>{name}</Text>
+                                            <Text> {housename}</Text>
+                                            {landmark && <Text><strong>Landmark:</strong> {landmark}</Text>}
+                                            {district && <Text><strong>District:</strong> {district}</Text>}
+                                            {state && <Text><strong>State:</strong> {state}</Text>}
+                                            {country && <Text><strong>Country:</strong> {country}</Text>}
+                                            {pincode && <Text><strong>Pincode:</strong> {pincode}</Text>}
 
-                    <ProfileSlider/>
-                    </Col>
-        </Row>
-        <Row>
-        <Tabs defaultActiveKey="1">
-  <TabPane tab="Business" key="1">
-    Content of Tab Pane 1
-  </TabPane>
-  <TabPane tab="Users" key="2">
-    Content of Tab Pane 2
-  </TabPane>
-  <TabPane tab="Activity" key="3">
-    <Activities activitylist={record.activities}/>
-  </TabPane>
-  <TabPane tab="Opportunity" key="4">
-    <JobOpprtunity opprtunitylist={record.jobs} />
-  </TabPane>
-  <TabPane tab="Sanskar" key="5">
-    <Dharmsiksha dharmsiksha={record.sanskar}/>
-  </TabPane>
-</Tabs>
-        </Row>
+                                        </Space>
+                                    </Card>
+                                </Col>
+                                {/* Add more AddressCard instances as needed */}
+                            </Row>
+                        </div>
+                    </Card>
+                </Col>
+                <Col xs={24} md={12}>
+
+                    <ProfileSlider />
+                </Col>
+            </Row>
+            <Row>
+                <Tabs defaultActiveKey="1">
+                    <TabPane tab="Users" key="1">
+                        <UserListTable userList={record.users_permissions_users} baderid={record.id} />
+                    </TabPane>
+                    <TabPane tab="Business" key="2">
+                        Content of Tab Pane 1
+                    </TabPane>
+                    <TabPane tab="TEAM" key="5">
+                        <TeamListTableView baderdata={record} baderid={record.id} teamList={record.baderteams} />
+                        {/* <Dharmsiksha dharmsiksha={record.sanskar} /> */}
+                    </TabPane>
+                    <TabPane tab="Activity" key="3">
+                        <Activities activitylist={record.activities} />
+                    </TabPane>
+                    <TabPane tab="Opportunity" key="4">
+                        <JobOpprtunity opprtunitylist={record.jobs} />
+                    </TabPane>
+                   
+                </Tabs>
+            </Row>
         </Show>
     );
 };

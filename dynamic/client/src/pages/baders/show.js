@@ -13,8 +13,8 @@ const { Text } = Typography;
 
 import Activities from "./Activities";
 import { UserProvider } from './BaderUserContext';
+import BusinessProTable from './BusinessProtable';
 import CreateTeamDialog from "./CreateTeamDialog";
-import CreateUserDialog from "./CreateUserDialog";
 import JobOpprtunity from "./JobOpprtunity";
 import ProfileSlider from "./ProfileSlider";
 import TeamListTableView from "./TeamListTableView";
@@ -60,15 +60,7 @@ const BaderShow = () => {
             }}
         >
             
-            <UserProvider>
-            <Space>
-                <CreateUserDialog baderdata={record} />
-                <Button type="primary" onClick={() => console.log('Add Team')} icon={<TeamOutlined />}>
-                                Team
-                            </Button>
-                
-                </Space>
-                </UserProvider>
+          
           
             <Row gutter={[16, 16]}>
                 <Col xs={24} md={12}>
@@ -152,7 +144,7 @@ const BaderShow = () => {
                         <UserListTable userList={record.users_permissions_users} baderid={record.id} />
                     </TabPane>
                     <TabPane tab="Business" key="2">
-                        Content of Tab Pane 1
+                        <BusinessProTable businessdata={record.businesses}/>
                     </TabPane>
                     <TabPane tab="TEAM" key="5">
                         <TeamListTableView baderdata={record} baderid={record.id} teamList={record.baderteams} />

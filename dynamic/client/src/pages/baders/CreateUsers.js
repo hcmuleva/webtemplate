@@ -110,16 +110,19 @@ const CreateUsers = ({baderid}) => {
       //Create Address Business and Education
       const addressData = await createAddress({
         ...values[1],
+        baders:baderid,
         users_permissions_users: response.id,
       });
       console.log("addressData", addressData);
       const businessData = await createBusiness({
         ...values[2],
+        baders:baderid,
         userids: response.id,
       }); 
       console.log("businessData", businessData);
       const educationData = await createEducation({
         ...values[3],
+       
         userid: response.id,
       });
      

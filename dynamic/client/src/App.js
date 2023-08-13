@@ -42,6 +42,8 @@ import BaderCreate from "./pages/baders/create";
 import BaderList from "./pages/baders/list";
 import BaderShow from "./pages/baders/show";
 import BaderEdit from "./pages/baders/edit";
+import ActivityTableView from "./pages/baders/ActivityTableView";
+import CreateActivityForm from "./pages/baders/CreateActivityForm";
 
   const ABLY_API_KEY = process.env.REACT_APP_ABLY_API_KEY;
   const API_URL = process.env.REACT_APP_API_SERVER;
@@ -267,11 +269,14 @@ import BaderEdit from "./pages/baders/edit";
                 <Route path="edit/:id" element={<DashboardEdit />} />
               </Route>
               <Route path="/baders">
+              
                 <Route index element={<BaderList />} />
                 <Route path="create" element={<BaderCreate />} />
                 <Route path="show/:id" element={<BaderShow />} />
                 <Route path="edit/:id" element={<BaderEdit />} />
+                
               </Route>
+             
               <Route path="/dashboards">
               <Route path="show/:userid" element={<ProfileShow />} />
               </Route>

@@ -7,11 +7,12 @@ const { TextArea } = Input;
 const API_URL = process.env.REACT_APP_API_SERVER;
 const TOKEN_KEY = process.env.REACT_APP_TOKEN_KEY;
 
-const CreateTeamForm = ({baderid, setOpen,teamid}) => {
+const CreateActivityForm = ({baderid, setOpen,teamid}) => {
+console.log('teamid', teamid)
   const [fileList, setFileList] = useState([]);
 
   const { formProps, saveButtonProps } = useForm({
-    resource: "teams",
+    resource: "activities",
     onMutationSuccess: (data, variables, context, isAutoSave) => {
         console.log("Mutation success!");
         console.log("Data:", data);
@@ -19,26 +20,27 @@ const CreateTeamForm = ({baderid, setOpen,teamid}) => {
         console.log("Context:", context);
         console.log("Is Auto Save:", isAutoSave);
         setOpen(false)
+       
         // You can perform additional actions or update state here
       },
   });
 
   const handleFormFinish = async (values) => {
-   values [teams]=teamid,
     values['baders']   =baderid
-    
-
+    values['teams'] = [teamid]
     formProps.onFinish?.(mediaUploadMapper(values));
+    
   };
 
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
 
+
   return (
     <div style={{ padding: "25px" }}>
       <Form {...formProps} onFinish={handleFormFinish}>
-      <Form.Item label="Team Logo" name="photo">
+      <Form.Item label="activity Logo" name="photos">
           <Upload
             name="files"
             action={`${API_URL}/api/upload`}
@@ -51,33 +53,23 @@ const CreateTeamForm = ({baderid, setOpen,teamid}) => {
             fileList={fileList}
             onChange={onChange}
           >
-            {fileList.length < 1 && "+ Upload"}
+            {fileList.length < 6 && "+ Upload"}
           </Upload>
         </Form.Item>
-      <Form.Item label="Team Type" name="teamtype"   initialValue="EDUCATION" 
-         rules={[{ required: true, message: "Please select a team type" }]}>
-        <Select placeholder="Select Team Type">
-          <Option value="EDUCATION">EDUCATION</Option>
-          <Option value="TRUSTTEE">TRUSTTEE</Option>
-          <Option value="SPORTS">SPORTS</Option>
-          <Option value="SANSKAR">SANSKAR</Option>
-          <Option value="TUITION">TUITION</Option>
-          <Option value="BHAJAN">BHAJAN</Option>
-        </Select>
-      </Form.Item>
+   
         <Form.Item
-          label="Team Name"
+          label="Activity Name"
           name="name"
           rules={[
-            { required: true, message: "Please enter the team name" },
+            { required: true, message: "Please enter the activity name" },
           ]}
         >
-          <Input placeholder="Team Name" />
+          <Input placeholder="Activity Name" />
         </Form.Item>
 
        
-        <Form.Item label="Description" name="description" rules={[{ required: true, message: "Please enter a description" }]}>
-        <TextArea rows={4} placeholder="Enter Description" />
+        <Form.Item label="Purpose" name="purpose" rules={[{ required: true, message: "Please enter a purpose" }]}>
+        <TextArea rows={4} placeholder="Enter purpose" />
       </Form.Item>
         <Form.Item>
           <Button
@@ -85,7 +77,7 @@ const CreateTeamForm = ({baderid, setOpen,teamid}) => {
             htmlType="submit"
             {...saveButtonProps}
           >
-            Create Team
+            Submit Activty
           </Button>
         </Form.Item>
       </Form>
@@ -93,4 +85,4 @@ const CreateTeamForm = ({baderid, setOpen,teamid}) => {
   );
 };
 
-export default CreateTeamForm;
+export default CreateActivityForm;

@@ -6,8 +6,7 @@ import { useShow } from "@refinedev/core";
 
 const TeamListTableView = ({ baderdata,baderid,teamList }) => {
     console.log("teamList",teamList)
-    
-  const columns = [
+      const columns = [
     {
       title: "Logo",
       dataIndex: "photo",
@@ -21,7 +20,7 @@ const TeamListTableView = ({ baderdata,baderid,teamList }) => {
     },
     {
         title: "Actions",
-        dataIndex: "id", // Assuming there's an "id" field in the teamList data
+        dataIndex: "id", 
         key: "actions",
         render: (id) => (
           <Button type="link" onClick={() => showAssignMembersModal(id)}>

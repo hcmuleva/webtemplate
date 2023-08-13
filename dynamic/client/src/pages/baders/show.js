@@ -6,9 +6,14 @@ import { useState } from "react";
 const { TabPane } = Tabs;
 const { Text } = Typography;
 
+<<<<<<< HEAD
 import { UserProvider } from "./BaderUserContext";
+=======
+import Activities from "./Activities";
+import { UserProvider } from './BaderUserContext';
+import BusinessProTable from './BusinessProtable';
+>>>>>>> 03acfa6332cb11f6de6c077d1601b09a4db81649
 import CreateTeamDialog from "./CreateTeamDialog";
-import CreateUserDialog from "./CreateUserDialog";
 import JobOpprtunity from "./JobOpprtunity";
 import ProfileSlider from "./ProfileSlider";
 import TeamListTableView from "./TeamListTableView";
@@ -106,6 +111,7 @@ const BaderShow = () => {
             >
               {/* Left section - Add User button */}
 
+<<<<<<< HEAD
               {/* Avatar and title */}
               <div
                 style={{
@@ -125,6 +131,53 @@ const BaderShow = () => {
             </div>
             <Space>
               {/* <Button type="primary" onClick={() => console.log('Add User')} icon={<UserAddOutlined />}>
+=======
+    return (
+        <Show
+            isLoading={isLoading}
+            headerProps={{
+                extra: (
+                    <>
+                        <ListButton />
+                        <EditButton />
+                        <RefreshButton onClick={handleRefresh} />
+                    </>
+                ),
+            }}
+        >
+            
+          
+          
+            <Row gutter={[16, 16]}>
+                <Col xs={24} md={12}>
+                    <Card style={{ width: 'calc(50% - 8px)' }}>
+                        <div style={{ textAlign: 'center' }}>
+                            <h2>{record.name}</h2>
+                        </div>
+                        {/* First half - Avatar and title */}
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+                            {/* Left section - Add User button */}
+
+
+
+                            {/* Avatar and title */}
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Avatar src={photoUrl} size={100} icon={<UserOutlined />} />
+                                <div style={{ textAlign: 'center' }}>
+
+                                    <p>{"Samaj ka pahala bader"}</p>
+                                </div>
+                            </div>
+
+                            {/* Right section - Add Team button */}
+                            <div>
+
+                            </div>
+                        </div>
+                        <Space>
+
+                            {/* <Button type="primary" onClick={() => console.log('Add User')} icon={<UserAddOutlined />}>
+>>>>>>> 03acfa6332cb11f6de6c077d1601b09a4db81649
                                 User
                             </Button> */}
               <CreateTeamDialog baderdata={record} />
@@ -184,6 +237,7 @@ const BaderShow = () => {
                     </Space>
                   </Card>
                 </Col>
+<<<<<<< HEAD
               </Row>
             </div>
           </Card>
@@ -226,6 +280,36 @@ const BaderShow = () => {
       </Row>
     </Show>
   );
+=======
+                <Col xs={24} md={12}>
+
+                    <ProfileSlider />
+                </Col>
+            </Row>
+            <Row>
+                <Tabs defaultActiveKey="1">
+                    <TabPane tab="Users" key="1">
+                        <UserListTable userList={record.users_permissions_users} baderid={record.id} />
+                    </TabPane>
+                    <TabPane tab="Business" key="2">
+                        <BusinessProTable businessdata={record.businesses}/>
+                    </TabPane>
+                    <TabPane tab="TEAM" key="5">
+                        <TeamListTableView baderdata={record} baderid={record.id} teamList={record.baderteams} />
+                        {/* <Dharmsiksha dharmsiksha={record.sanskar} /> */}
+                    </TabPane>
+                    <TabPane tab="Activity" key="3">
+                        <Activities activitylist={record.activities} />
+                    </TabPane>
+                    <TabPane tab="Opportunity" key="4">
+                        <JobOpprtunity opprtunitylist={record.jobs} />
+                    </TabPane>
+                   
+                </Tabs>
+            </Row>
+        </Show>
+    );
+>>>>>>> 03acfa6332cb11f6de6c077d1601b09a4db81649
 };
 
 export default BaderShow;

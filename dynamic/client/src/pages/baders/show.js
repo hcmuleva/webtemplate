@@ -12,7 +12,7 @@ const { TabPane } = Tabs;
 const { Text } = Typography;
 
 import Activities from "./Activities";
-import { UserProvider } from './BaderUserContext';
+import ActivityTableView from './ActivityTableView';
 import BusinessProTable from './BusinessProtable';
 import CreateTeamDialog from "./CreateTeamDialog";
 import JobOpprtunity from "./JobOpprtunity";
@@ -27,7 +27,8 @@ const BaderShow = () => {
 
 
     const { queryResult } = useShow({
-        metaData: { populate: ['photo', 'address','baderteams','baderteams.photo', 'users_permissions_users','users_permissions_users.photo', 'businesses', 'activities', 'jobs', ] },
+        metaData: { populate: ['photo', 'address','baderteams','baderteams.photo', 'users_permissions_users','users_permissions_users.photo', 'businesses',  "activities",
+        "activities.photos", 'jobs', ] },
     });
     const [openUserDialog, setOpenUserDialog] = useState(false)
     const [openTeamDialog, setOpenTeamDialog] = useState(false)
@@ -88,16 +89,7 @@ const BaderShow = () => {
 
                             </div>
                         </div>
-                        <Space>
-
-                            {/* <Button type="primary" onClick={() => console.log('Add User')} icon={<UserAddOutlined />}>
-                                User
-                            </Button> */}
-                            <CreateTeamDialog baderdata={record} />
-                            <Button type="primary" onClick={() => console.log('Add Activity')} icon={<PlusOutlined />}>
-                                Activity
-                            </Button>
-                        </Space>
+                       
                         {/* Second half - Map and address details */}
                         <br></br>
                         <div style={{ marginBottom: 16 }}>
@@ -151,14 +143,20 @@ const BaderShow = () => {
                         {/* <Dharmsiksha dharmsiksha={record.sanskar} /> */}
                     </TabPane>
                     <TabPane tab="Activity" key="3">
-                        <Activities activitylist={record.activities} />
-                    </TabPane>
+            <ActivityTableView
+              baderdata={record}
+              baderid={record?.id}
+              teamid={record?.id}
+              ActivityList={record.activities}
+            />
+          </TabPane>
                     <TabPane tab="Opportunity" key="4">
                         <JobOpprtunity opprtunitylist={record.jobs} />
                     </TabPane>
                    
                 </Tabs>
             </Row>
+           
         </Show>
     );
 };

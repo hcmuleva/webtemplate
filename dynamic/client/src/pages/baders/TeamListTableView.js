@@ -32,19 +32,14 @@ const TeamListTableView = ({ baderdata,baderid,teamList }) => {
   ];
 
   const [isCreateTeamModalVisible, setIsCreateTeamModalVisible] = useState(false);
-  const [isAssignMembersModalVisible, setIsAssignMembersModalVisible] =
-  useState(false);
+  const [isAssignMembers, setIsAssignMembers] =useState(false);
 const [selectedTeamId, setSelectedTeamId] = useState(null);
 
 const showAssignMembersModal = (teamId) => {
   setSelectedTeamId(teamId);
-  setIsAssignMembersModalVisible(true);
+  setIsAssignMembers(true);
 };
 
-const handleAssignMembersCancel = () => {
-  setSelectedTeamId(null);
-  setIsAssignMembersModalVisible(false);
-};
 
   const showModal = () => {
     setIsCreateTeamModalVisible(true);
@@ -55,7 +50,7 @@ const handleAssignMembersCancel = () => {
   };
 
   return (
-    <>
+ <>  {isAssignMembers? <UserTransferList  selectedTeamId={selectedTeamId} setSelectedTeamId={setSelectedTeamId} baderdata={baderdata} setIsAssignMembers={setIsAssignMembers} isAssignMembers={isAssignMembers}/>: <> 
       <Button type="primary" onClick={showModal}>
         Create Team
       </Button>
@@ -67,16 +62,13 @@ const handleAssignMembersCancel = () => {
       >
         <CreateTeamForm baderid={baderid} setOpen={setIsCreateTeamModalVisible}/>
       </Modal>
-      <Modal
-        title="Assign Members to Team"
-        visible={isAssignMembersModalVisible}
-        onCancel={handleAssignMembersCancel}
-        footer={null}
-      >
-        <UserTransferList  selectedTeamId={selectedTeamId} baderdata={baderdata} setIsAssignMembersModalVisible={setIsAssignMembersModalVisible}/>
-      </Modal>
+     
+       
+      
       <Table columns={columns} dataSource={teamList} />
-    </>
+      </>
+  }
+   </>
   );
 };
 

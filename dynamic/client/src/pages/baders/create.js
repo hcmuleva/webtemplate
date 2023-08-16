@@ -12,6 +12,7 @@ const TOKEN_KEY = process.env.REACT_APP_TOKEN_KEY
  const BaderCreate = () => {
    
     const { formProps, saveButtonProps } = useForm();
+    
 const [fileList, setFileList] = useState([
         {
           uid: "-1",
@@ -20,6 +21,7 @@ const [fileList, setFileList] = useState([
           url: "https://cdn.dribbble.com/users/1223630/screenshots/8115260/media/8145a871d9c4d67ec06e047ccc6574b4.gif",
         },
       ]);
+
       const onChange = ({ fileList: newFileList }) => {
         setFileList(newFileList);
       };

@@ -15,10 +15,11 @@ import Activities from "./Activities";
 import ActivityTableView from './ActivityTableView';
 import BusinessProTable from './BusinessProtable';
 import CreateTeamDialog from "./CreateTeamDialog";
-import JobOpprtunity from "./JobOpprtunity";
+import JobOpprtunity from "./JobOpportunity";
 import ProfileSlider from "./ProfileSlider";
 import TeamListTableView from "./TeamListTableView";
 import UserListTable from "./UserListTableView";
+import JobOpportunity from './JobOpportunity';
 
 const API_URL = process.env.REACT_APP_API_SERVER;
 const TOKEN_KEY = process.env.REACT_APP_TOKEN_KEY;
@@ -176,7 +177,7 @@ console.log("record ", record);
             />
           </TabPane>
                     <TabPane tab="Opportunity" key="4">
-                        <JobOpprtunity opprtunitylist={record.jobs} />
+                        <JobOpportunity opprtunitylist={record.jobs} />
                     </TabPane>
                    
                 </Tabs>

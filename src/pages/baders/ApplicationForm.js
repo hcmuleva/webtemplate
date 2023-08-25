@@ -24,10 +24,7 @@ const ApplicationForm = () => {
    <div className='container-fluid' style={{marginTop:"-400px"}}>
     <Form layout="vertical" onFinish={(values) => {
         console.log("FINISH time values ", values)
-       
-    
-     
-        formProps.onFinish?.(mediaUploadMapper(values));
+             formProps.onFinish?.(mediaUploadMapper(values));
     }}>
         
           {/* <Form.Item style={{marginLeft:"300px" , marginTop:"40px"}}>

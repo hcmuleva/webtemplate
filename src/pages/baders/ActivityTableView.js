@@ -78,21 +78,10 @@ const ActivityTableView = ({ baderdata, baderid, teamid, ActivityList }) => {
           <Table.Column dataIndex="name" key="name" title="Names" />
           <Table.Column dataIndex="purpose" key="purpose" title="Purpose" />
 
-          {/* <Table.Column
-            title="Actions"
-            dataIndex="actions"
-            key="actions"
-            render={(_, record) => ( 
-              <Space>
-                <EditButton hideText="false" size="small" recordItemId={record.id} />
-                <DeleteButton hideText="false" size="small" recordItemId={record.id} />
-              </Space>
-            )}
-            width="150px"
-          /> */}
+       
         </Table>
       </List>
-      {/* <Table columns={columns} dataSource={ActivityList} /> */}
+     
     </>
   );
 };

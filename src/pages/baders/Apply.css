@@ -1,0 +1,72 @@
+.custom-modal .ant-modal-content {
+    background-color: #146099; /* Replace with your desired background color */
+    border-radius: 15px;
+  }
+
+/* YourComponent.css */
+.custom-form {
+    background-color:  #9db2c663;;
+    color: #54b2c19e;
+    border-radius: 10px;
+    padding: 15px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .custom-form:hover {
+    background-color: rgba(24, 165, 184, 0.56); /* Replace with your desired background color and opacity */
+  }
+  
+  /* Optional: Add an animation effect on hover */
+  .custom-form:hover {
+    animation: fadeIn 0.3s ease-in-out; /* Replace with your desired animation */
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0.8;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.upload-field {
+  margin-right: 80px;
+  margin-top: 20px;
+}
+
+.upload-label {
+  margin-right: 70px;
+  color: rgba(34, 34, 34, 0.67);
+}
+
+.input-field,
+.select-field,
+.textarea-field {
+  margin-bottom: 15px;
+}
+
+.custom-input,
+.custom-select,
+.custom-textarea {
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+}
+
+.submit-button {
+  background-color: #007bff;
+  border: none;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}

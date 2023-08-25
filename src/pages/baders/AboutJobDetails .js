@@ -11,6 +11,7 @@ import {
   Divider,
 } from "antd";
 import { getValueProps, mediaUploadMapper } from "@refinedev/strapi-v4";
+import './AboutJobDetail.css'
 const API_URL = process.env.REACT_APP_API_SERVER;
 const TOKEN_KEY = process.env.REACT_APP_TOKEN_KEY;
 
@@ -62,8 +63,9 @@ const AboutJobDetails = ({ formValues, submit, formProps }) => {
           // console.log("FINISH time values ", values);
           formProps.onFinish?.(mediaUploadMapper(values));
         }}
+        
       >
-        <Card className="about-job-card" hoverable>
+        <Card className="custom-form" hoverable>
           <div
             style={{
               display: "flex",
@@ -93,7 +95,7 @@ const AboutJobDetails = ({ formValues, submit, formProps }) => {
                 {fileList.length < 5 && "+ Upload"}
               </Upload>
             </Form.Item>
-            <span style={{ marginRight: "70px", color: "silver" }}>
+            <span style={{ marginRight: "70px", color: "black" }}>
               Upload your Job Requirement File
             </span>
           </div>

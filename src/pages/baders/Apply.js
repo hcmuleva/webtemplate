@@ -15,17 +15,17 @@ import { getValueProps, mediaUploadMapper } from "@refinedev/strapi-v4";
 import TextArea from "antd/es/input/TextArea";
 import { useForm } from "@refinedev/antd";
 import { useGetIdentity } from "@refinedev/core";
+import "./Apply.css";
 
- 
 const API_URL = process.env.REACT_APP_API_SERVER;
 const TOKEN_KEY = process.env.REACT_APP_TOKEN_KEY;
 
 const { Option } = Select;
 
-const Apply = ({ isModalOpenApply, setIsModalOpenApply,opportunityid  }) => {
+const Apply = ({ isModalOpenApply, setIsModalOpenApply, opportunityid }) => {
   console.log("opportunityid", opportunityid);
-  const {data:identity}=useGetIdentity()
-  console.log("identity",identity)
+  const { data: identity } = useGetIdentity();
+  console.log("identity", identity);
   const showModalApply = () => {
     setIsModalOpenApply(true);
   };
@@ -73,15 +73,14 @@ const Apply = ({ isModalOpenApply, setIsModalOpenApply,opportunityid  }) => {
   const handleSubmit = (values) => {
     // const values = formValues.getFieldsValue()
     console.log("FINISH time values ", values);
-    values['opportunity']=opportunityid
-    values['userid']=identity?.id
+    values["opportunity"] = opportunityid;
+    values["userid"] = identity?.id;
     formProps?.onFinish?.(mediaUploadMapper(values));
-    formProps?.form?.resetFields()
+    formProps?.form?.resetFields();
     setIsModalOpenApply(false);
-   
   };
   return (
-    <div>
+    <div className="custom-modal">
       <Modal
         title="Apply"
         open={isModalOpenApply}
@@ -89,29 +88,20 @@ const Apply = ({ isModalOpenApply, setIsModalOpenApply,opportunityid  }) => {
         footer={null}
         width={1200}
       >
-        <div
-          className="container-fluid"
-          style={{ padding: "15px", marginTop: "-0px" }}
-        >
+        <div className="custom-form">
           <Form {...formProps} layout="vertical" onFinish={handleSubmit}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
+            <div className="upload-section">
               <Form.Item
                 name="profile"
                 valuePropName="profile"
                 getValueProps={(data) => getValueProps(data, API_URL)}
-                style={{ marginRight: "80px", marginTop: "20px" }}
+                className="upload-field"
               >
                 <Upload
                   name="files"
                   action={`${API_URL}/api/upload`}
                   headers={{
-                    "Access-Control_Allow-Origin": "*",
+                    "Access-Control-Allow-Origin": "*",
                     Authorization: `Bearer ${localStorage.getItem(TOKEN_KEY)}`,
                   }}
                   accept="image/*"
@@ -123,31 +113,26 @@ const Apply = ({ isModalOpenApply, setIsModalOpenApply,opportunityid  }) => {
                   {fileList.length < 5 && "+ Upload"}
                 </Upload>
               </Form.Item>
-              <span style={{ marginRight: "70px", color: "silver" }}>
-                Upload your resume
-              </span>
+              <span className="upload-label">Upload your resume</span>
             </div>
             <Divider />
             <Row gutter={24}>
               <Col span={12}>
-                <Form.Item label=" Full Name" name="fullname">
-                  <Input />
+                <Form.Item label="Full Name" name="fullname" className="input-field">
+                  <Input className="custom-input" />
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item label=" Email Id" name="email">
-                  <Input type="email" />
+                <Form.Item label="Email Id" name="email" className="input-field">
+                  <Input type="email" className="custom-input" />
                 </Form.Item>
               </Col>
-
               <Col span={12}>
-                <Form.Item label="Your Experience" name="experience">
+                <Form.Item label="Your Experience" name="experience" className="select-field">
                   <Select
                     placeholder="Select your experience"
                     value={selectedItems}
-                    style={{
-                      width: "100%",
-                    }}
+                    className="custom-select"
                     options={filteredOptions.map((item) => ({
                       value: item,
                       label: item,
@@ -156,10 +141,11 @@ const Apply = ({ isModalOpenApply, setIsModalOpenApply,opportunityid  }) => {
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item label="Interest" name="intrest">
+                <Form.Item label="Interest" name="intrest" className="select-field">
                   <Select
                     onChange={handleInterestChange}
                     placeholder="Select Interest"
+                    className="custom-select"
                   >
                     <Option value="immediate">Immediate</Option>
                     <Option value="interested">Interested</Option>
@@ -168,23 +154,23 @@ const Apply = ({ isModalOpenApply, setIsModalOpenApply,opportunityid  }) => {
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item label="Preference" name="preferences">
-                  <Input type="text" />
+                <Form.Item label="Preference" name="preferences" className="input-field">
+                  <Input type="text" className="custom-input" />
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item label="Joining Date" name="joiningdate">
-                  <Input type="date" />
+                <Form.Item label="Joining Date" name="joiningdate" className="input-field">
+                  <Input type="date" className="custom-input" />
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item label="Skill" name="skill">
-                  <TextArea rows={4} placeholder="Enter your skill" />
+                <Form.Item label="Skill" name="skill" className="textarea-field">
+                  <TextArea rows={4} placeholder="Enter your skill" className="custom-textarea" />
                 </Form.Item>
               </Col>
             </Row>
-            <Button type="primary" htmlType="submit">
-              Submit{" "}
+            <Button type="primary" htmlType="submit" className="submit-button">
+              Submit
             </Button>
           </Form>
         </div>

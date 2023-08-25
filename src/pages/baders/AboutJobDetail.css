@@ -1,0 +1,26 @@
+.custom-form {
+    background-color:  #e9edf0d1;;
+    color: #dee6e79e;
+    border-radius: 10px;
+    padding: 15px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .custom-form:hover {
+    background-color: rgba(24, 165, 184, 0.56); /* Replace with your desired background color and opacity */
+  }
+  
+  /* Optional: Add an animation effect on hover */
+  .custom-form:hover {
+    animation: fadeIn 0.3s ease-in-out; /* Replace with your desired animation */
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0.8;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  

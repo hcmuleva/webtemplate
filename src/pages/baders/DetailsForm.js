@@ -41,7 +41,7 @@ const DetailsForm = ({ formValues, next, formProps }) => {
 
   return (
     <div className="container">
-      <Form {...formProps} form={formValues}>
+      <Form {...formProps} form={formValues} className="custom-form">
         <div className="card">
           <Row gutter={[16, 16]}>
             <Col span={8} className="label-col">

@@ -1,0 +1,17 @@
+version: "3.3"
+
+services:
+  hphlms:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: hphlms
+    container_name: hphlms
+    ports:
+      - 8201:80
+    networks:
+      - hphlms-net
+    restart: always
+
+networks:
+  hphlms-net:

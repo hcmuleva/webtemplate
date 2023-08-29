@@ -1,0 +1,23 @@
+/* Boxed theme */
+
+.full {
+	max-width:1200px!important;
+	margin:0 auto;
+	box-shadow: 10px 10px 100px -19px rgba(0,0,0,0.75);
+	background:#fff;
+}
+.full .navbar{
+	max-width:1200px!important;
+	margin:0 auto;
+}
+.full #layerslider{max-height:600px!important;overflow:hidden;}
+
+/************ min width 1500px *************/
+ @media (min-width: 1500px) {
+
+	.full .video-text {
+		max-width: 50%;
+		bottom: 20%;
+		padding: 30px;
+   }
+ }

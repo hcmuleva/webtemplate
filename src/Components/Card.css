@@ -1,0 +1,77 @@
+/* Card.css */
+.card {
+    border: 1px solid silver;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    max-width: 600px; /* Adjust the maximum width as needed */
+   
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+  }
+  
+  .row {
+    display: flex;
+    align-items: flex-start; /* Adjust alignment as needed */
+    margin-bottom: 10px;
+  }
+  
+  .circle-img {
+    width: 70px; /* Adjust the width for your circular image */
+    height: 70px; /* Adjust the height for your circular image */
+    border-radius: 50%; /* Make the image circular */
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .content {
+    flex-grow: 1;
+    text-align: left;
+    margin-right: 20px; /* Add margin for gap */
+  }
+  
+  h5 {
+    font-weight: bolder;
+    margin: 0;
+    margin-bottom: 5px; /* Add margin for gap after h5 */
+    font-size: medium;
+  }
+  
+  .specialization {
+    margin-bottom: 10px; /* Add margin for gap after p.specialization */
+  }
+  
+  .address {
+    margin-bottom: 10px; /* Add margin for gap after p.address */
+  }
+  .Date {
+     margin-bottom: 10px;
+  }
+  .light-button {
+    margin-bottom: 10px;
+  }
+  .additional-content {
+    text-align: left;
+    margin-right: 80px;
+  }
+  
+  .light-button {
+    background-color: #dfdbdb; /* Light gray background for the button */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    color: silver;
+  }
+  
+  .blue-link {
+    color: blue; /* Blue link color */
+    text-decoration: underline;
+    
+  }
+  
+  /* Add any other styles you may need */
+  
